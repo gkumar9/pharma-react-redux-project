@@ -27,13 +27,13 @@ const Prescription = () => {
                 </div>
                 <section className="mb-4">
                     <div className="mt-3 mb-3 row">
-                        <label for="inputTemp" className="col-sm-2 col-form-label">Temperature in F</label>
+                        <label htmlFor="inputTemp" className="col-sm-2 col-form-label">Temperature in F</label>
                         <div className="col-sm-4">
                             <input type="number" className="form-control" value={temp} onChange={(e) => setTemp(e.target.value)} />
                         </div>
                     </div>
                     <div className="mb-3 row">
-                        <label for="inputAge" className="col-sm-2 col-form-label">Age</label>
+                        <label htmlFor="inputAge" className="col-sm-2 col-form-label">Age</label>
                         <div className="col-sm-4">
                             <input type="number" className="form-control" id="inputAge" value={age} onChange={(e) => setAge(e.target.value)} />
                         </div>
@@ -58,15 +58,15 @@ const Prescription = () => {
                         <ul className="list-group  list-group-flush symptomsList">
                             {symptoms && symptoms.map((item, index) => {
                                 return <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
-                                    {item} <a href="#" role="button" className="close-icon" onClick={() => setSymptoms(symptoms.filter((item, i) => (i != index) && item))}><i class="fa-solid fa-circle-xmark"></i></a>
+                                    {item} <a href="#" role="button" className="close-icon" onClick={() => setSymptoms(symptoms.filter((item, i) => (i != index) && item))}><i className="fa-solid fa-circle-xmark"></i></a>
                                 </li>
                             })}
                         </ul>
                     </div>
                     <hr />
                     <h4 className=" my-4">Rx:</h4>
-                    <div id="diagnosisTable" class="table-responsive  my-2" style={showDiagnosis ? { display: 'block' } : { display: 'none' }}>
-                        <table class="table">
+                    <div id="diagnosisTable" className="table-responsive  my-2" style={showDiagnosis ? { display: 'block' } : { display: 'none' }}>
+                        <table className="table">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>

@@ -20,8 +20,8 @@ const Header = () => {
                                     className=" nav-link active  " aria-current=" page" href="#dashboard">Dashboard</a>
                             </li>
                             <li className="nav-item" role="presentation">
-                                <a role="tab" data-bs-toggle="tab" data-bs-target="#drug-inventory" className="nav-link "
-                                    href="#drug-inventory">Drug inventory</a>
+                                <a role="tab" data-bs-toggle="tab" data-bs-target="#drug-inventory"
+                                 className="nav-link "  href="#drug-inventory">Drug inventory</a>
                             </li>
                             <li className="nav-item" role="presentation">
                                 <a role="tab" data-bs-toggle="tab" data-bs-target="#e-prescription" className="nav-link "

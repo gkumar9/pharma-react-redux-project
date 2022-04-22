@@ -100,6 +100,10 @@ footer .text-light {
 }
 
 @media (max-width: 699px) {
+  footer{
+    position: fixed;
+    bottom: 0;
+  }
   h4 {
     font-size: inherit;
   }

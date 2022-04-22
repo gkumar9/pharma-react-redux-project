@@ -12,6 +12,8 @@ import {
 import { Line } from 'react-chartjs-2';
 import faker from 'faker';
 import { useState } from 'react';
+// import store from '../../redux/store.js'
+import { useSelector } from 'react-redux';
 
 ChartJS.register(
     CategoryScale,
@@ -57,6 +59,7 @@ export const data = {
 };
 
 const Dashboard = () => {
+    const {coin} = useSelector((state)=>state.counter);
     const [notification, setNotification] = useState([{ id: "T234F", name: "2 Packs of Mesalazine.", date: '12/04/2022' }, { id: "W2343", name: "1 Packs of Becadexamine.", date: '22/05/2022' }])
     return (
         <div id="dashboard" role="tabpanel" className="tab-pane active">
@@ -68,7 +71,7 @@ const Dashboard = () => {
                                 <img src={DashboardBanner} alt="banner" style={{ width: '100%' }} />
                             </div>
                             <div className="col-9 col-xl-9 col-md-9 dashboardImg">
-                                <h2 style={{ color: 'purple' }}> Never worry about your inventory</h2>
+                                <h2 style={{ color: 'purple' }}> Never worry about your pharmacy</h2>
                             </div>
                         </div>
                         <div className="row my-4">
@@ -121,7 +124,7 @@ const Dashboard = () => {
                                                     <div className="col-auto">
                                                         <div
                                                             className="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                                            50%</div>
+                                                            {coin/10*100}%</div>
                                                     </div>
                                                     <div className="col">
                                                         <div className="progress progress-sm mr-2">
@@ -147,7 +150,7 @@ const Dashboard = () => {
                                             <div className="col mr-2">
                                                 <div
                                                     className="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                    Prescription</div>
+                                                    Orders</div>
                                                 <div className="h5 mb-0 font-weight-bold text-gray-800">18</div>
                                             </div>
                                             <div className="col-auto">
@@ -165,7 +168,7 @@ const Dashboard = () => {
                                         <h5 className="card-title"><i className="fa-regular fa-bell"></i>&nbsp; {item.name} </h5>
                                         <label style={{ color: "gray", fontSize: "smaller" }}>#{item.id}</label>
                                         <span style={{ fontSize: "smaller", color: "gray", float: "right" }}> {item.date}</span>
-                                        <a href="#" onClick={() => setNotification(notification.filter((item, i) => (i != index) && item))} role="button" className="close-icon"><i class="fa-solid fa-xmark"></i></a>
+                                        <a href="#" onClick={() => setNotification(notification.filter((item, i) => (i != index) && item))} role="button" className="close-icon"><i className="fa-solid fa-xmark"></i></a>
                                         <p className="card-text">An anti-inflammatory agent, structurally related to the
                                             salicylates, which is active in inflammatory bowel disease. It is
                                             considered
@@ -182,7 +185,7 @@ const Dashboard = () => {
                                         received: #DB01246 </h5>
                                     <label style={{ color: "gray", fontSize: "smaller" }}>2 Packs of Mesalazine.</label>
                                     <span style={{ fontSize: "smaller", color: "gray", float: "right" }}> 12/02/2022</span>
-                                    <a href="#" role="button" className="close-icon"><i class="fa-solid fa-xmark"></i></a>
+                                    <a href="#" role="button" className="close-icon"><i className="fa-solid fa-xmark"></i></a>
                                     <p className="card-text">An anti-inflammatory agent, structurally related to the
                                         salicylates, which is active in inflammatory bowel disease. It is
                                         considered

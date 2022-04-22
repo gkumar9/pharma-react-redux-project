@@ -4,10 +4,23 @@ import { useEffect, useState } from 'react';
 // // window.jQuery = $;
 // // window.$ = $;
 // // global.jQuery = $;
+// import { connect } from 'react-redux';
+import {
+    increment,
+    decrement,
+    incrementByAmount,
+    decrementByAmount, reset
+} from '../../redux/reducer';
+import { useDispatch } from "react-redux";
+import { useSelector } from 'react-redux';
 
 const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(data, null, 2)}</pre>;
+// import { useDispatch } from "react-redux";
 
-const Inventory = () => {
+const Inventory = (props) => {
+    const dispatch = useDispatch();
+    const { coin } = useSelector((state) => state.counter);
+
     const [invertorydata, setInventoryData] = useState([])
     const [editDataInventory, seteditDataInventory] = useState([])
     const [deleteInventoryID, setdeleteInventoryID] = useState();
@@ -29,6 +42,10 @@ const Inventory = () => {
             .then((res) => res.json())
             .then((data) => {
                 setInventoryData((data.data))
+                console.log(data.data.length)
+                dispatch(reset())
+                dispatch(incrementByAmount(data.data.length));
+                // data.data.map(()=>props.onAdd());
             })
     }, []);
 
@@ -59,10 +76,12 @@ const Inventory = () => {
             .then(res => {
                 console.log(res);
                 fetch('//localhost:4000/rest-api/drugInventory')
-            .then((res) => res.json())
-            .then((data) => {
-                setInventoryData((data.data))
-            })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        setInventoryData((data.data))
+                        dispatch(reset())
+                        dispatch(incrementByAmount(data.data.length));
+                    })
                 // window.$("#myModalADD").modal("hide")
             });
     }
@@ -98,10 +117,12 @@ const Inventory = () => {
             .then(res => {
                 console.log(res);
                 fetch('//localhost:4000/rest-api/drugInventory')
-            .then((res) => res.json())
-            .then((data) => {
-                setInventoryData((data.data))
-            })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        setInventoryData((data.data))
+                        dispatch(reset())
+                        dispatch(incrementByAmount(data.data.length));
+                    })
             });
     }
 
@@ -116,10 +137,12 @@ const Inventory = () => {
             .then(res => {
                 console.log(res);
                 fetch('//localhost:4000/rest-api/drugInventory')
-            .then((res) => res.json())
-            .then((data) => {
-                setInventoryData((data.data))
-            })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        setInventoryData((data.data))
+                        dispatch(reset())
+                        dispatch(incrementByAmount(data.data.length));
+                    })
                 // window.$("#myModalADD").modal("hide")
             });
     }
@@ -134,7 +157,7 @@ const Inventory = () => {
                             <div className="progress">
                                 <div className="progress-bar" role="progressbar"
                                     style={{ width: "50%", fontSize: "smaller" }} aria-valuenow="50"
-                                    aria-valuemin="0" aria-valuemax="100">50% Strength
+                                    aria-valuemin="0" aria-valuemax="100">{coin / 10 * 100}% Strength
                                 </div>
                             </div>
                         </div>
@@ -425,14 +448,14 @@ const Inventory = () => {
                                             name: 'Edit',
                                             cell: row => (
                                                 <a href="#" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModaledit" onClick={() => editTable(row.DrugID)} role="button" ><i class="fa-solid fa-pen-to-square"></i></a>
+                                                    data-bs-target="#exampleModaledit" onClick={() => editTable(row.DrugID)} role="button" ><i className="fa-solid fa-pen-to-square"></i></a>
                                             )
                                         },
                                         {
                                             name: 'Delete',
                                             cell: row => (
                                                 <a href="#" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModalDelete" onClick={() => setdeleteInventoryID(row.DrugID)} role="button" ><i class="fa-solid fa-trash"></i></a>
+                                                    data-bs-target="#exampleModalDelete" onClick={() => setdeleteInventoryID(row.DrugID)} role="button" ><i className="fa-solid fa-trash"></i></a>
                                             )
                                         }
                                     ]}
@@ -448,3 +471,20 @@ const Inventory = () => {
     )
 }
 export default Inventory;
+// const mapStateToProps = state => {
+//     return {
+//         ctr: state.counter
+//     }
+// }
+
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         onAdd: () => dispatch({ type: actionType.ADD }),
+//         onSubtract: () => dispatch({type: actionType.SUBTRACT})
+//     }
+// }
+
+// export default connect(
+//     mapStateToProps,
+//     mapDispatchToProps
+// )(Inventory);
